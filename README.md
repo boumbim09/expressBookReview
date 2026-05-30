@@ -8,12 +8,12 @@ I built this project while learning backend development with IBM Coursera. It co
 
 ## Features
 
-- ✅ User registration and JWT authentication
-- ✅ Book search by ISBN, author, or title
-- ✅ Add, edit, and delete book reviews
-- ✅ Session management with express-session
-- ✅ Error handling and validation
-- ✅ RESTful API design
+- User registration and JWT authentication
+- Book search by ISBN, author, or title
+- Add, edit, and delete book reviews
+- Session management with express-session
+- Error handling and validation
+- RESTful API design
 
 ## Tech Stack
 
@@ -126,16 +126,16 @@ expressBookReview/
 
 ## Certificate
 
-**IBM - Developing Back-End Apps with Node.js and Express** (Coursera)
+IBM - Developing Back-End Apps with Node.js and Express (Coursera)
 
 ## Future Improvements
 
-- [ ] Database integration (MongoDB/PostgreSQL)
-- [ ] Password encryption (bcrypt)
-- [ ] Rate limiting
-- [ ] API documentation with Swagger
-- [ ] Unit tests
-- [ ] Refresh token implementation
+- Database integration (MongoDB/PostgreSQL)
+- Password encryption (bcrypt)
+- Rate limiting
+- API documentation with Swagger
+- Unit tests
+- Refresh token implementation
 
 ## License
 
@@ -143,4 +143,4 @@ This project is open source and available under the MIT License.
 
 ## Author
 
-**Phoutdavanh** - [GitHub](https://github.com/boumbim09)
+Phoutdavanh - [GitHub](https://github.com/boumbim09)
