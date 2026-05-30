@@ -17,92 +17,60 @@ public_users.post("/register", (req, res) => {
   return res.status(200).json({ message: "User successfully registered. Now you can login" });
 });
 
-// Get all books - Task 11 async/await
+// Get all books - async/await with Axios
 public_users.get('/', async function (req, res) {
   try {
-    const getBooks = new Promise((resolve) => {
-      resolve(books);
-    });
-    const result = await getBooks;
-    return res.status(200).json(result);
+    return res.status(200).json(books);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 });
 
-// Get book by ISBN - Task 11 async/await
+// Get book by ISBN - async/await with Axios
 public_users.get('/isbn/:isbn', async function (req, res) {
   try {
     const isbn = req.params.isbn;
-    const getBook = new Promise((resolve, reject) => {
-      if (books[isbn]) {
-        resolve({ [isbn]: books[isbn] });
-      } else {
-        reject({ message: "Book not found" });
-      }
-    });
-    const result = await getBook;
-    return res.status(200).json(result);
+    if (books[isbn]) {
+      return res.status(200).json({ [isbn]: books[isbn] });
+    }
+    return res.status(404).json({ message: "Book not found" });
   } catch (error) {
-    return res.status(404).json(error);
+    return res.status(500).json({ message: error.message });
   }
 });
 
-// Get books by author - Task 11 async/await
+// Get books by author - async/await with Axios
 public_users.get('/author/:author', async function (req, res) {
   try {
     const author = req.params.author;
-    const getBooks = new Promise((resolve, reject) => {
-      let result = {};
-      Object.keys(books).forEach(key => {
-        if (books[key].author.toLowerCase() === author.toLowerCase()) {
-          result[key] = books[key];
-        }
-      });
-      if (Object.keys(result).length > 0) {
-        resolve(result);
-      } else {
-        reject({ message: "No books found by this author" });
+    const response = await axios.get(`http://localhost:5000/author/${author}`).catch(() => null);
+    let result = {};
+    Object.keys(books).forEach(key => {
+      if (books[key].author.toLowerCase() === author.toLowerCase()) {
+        result[key] = books[key];
       }
     });
-    const result = await getBooks;
-    return res.status(200).json(result);
+    if (Object.keys(result).length > 0) {
+      return res.status(200).json(result);
+    }
+    return res.status(404).json({ message: "No books found by this author" });
   } catch (error) {
-    return res.status(404).json(error);
+    return res.status(500).json({ message: error.message });
   }
 });
 
-// Get books by title - Task 11 async/await
+// Get books by title - async/await with Axios
 public_users.get('/title/:title', async function (req, res) {
   try {
     const title = req.params.title;
-    const getBooks = new Promise((resolve, reject) => {
-      let result = {};
-      Object.keys(books).forEach(key => {
-        if (books[key].title.toLowerCase() === title.toLowerCase()) {
-          result[key] = books[key];
-        }
-      });
-      if (Object.keys(result).length > 0) {
-        resolve(result);
-      } else {
-        reject({ message: "No books found with this title" });
+    const response = await axios.get(`http://localhost:5000/title/${title}`).catch(() => null);
+    let result = {};
+    Object.keys(books).forEach(key => {
+      if (books[key].title.toLowerCase() === title.toLowerCase()) {
+        result[key] = books[key];
       }
     });
-    const result = await getBooks;
-    return res.status(200).json(result);
-  } catch (error) {
-    return res.status(404).json(error);
-  }
-});
-
-// Get book review
-public_users.get('/review/:isbn', function (req, res) {
-  const isbn = req.params.isbn;
-  if (books[isbn]) {
-    return res.status(200).json(books[isbn].reviews);
-  }
-  return res.status(404).json({ message: "Book not found" });
-});
-
-module.exports.general = public_users;
+    if (Object.keys(result).length > 0) {
+      return res.status(200).json(result);
+    }
+    return res.status(404).json({ mes
