@@ -30,7 +30,7 @@ regd_users.post("/login", (req, res) => {
 // Add/modify review
 regd_users.put("/auth/review/:isbn", (req, res) => {
   const isbn = req.params.isbn;
-  const review = req.body.review;
+  const review = req.query.review || req.body.review;
   const username = req.user.username;
   if (books[isbn]) {
     books[isbn].reviews[username] = review;

@@ -71,44 +71,44 @@ public_users.get('/review/:isbn', function (req, res) {
 });
 
 // Task 11: Async/Await with Axios
-// Get all books using async/await
-const getAllBooksAsync = async () => {
+// Route: Get all books using async/await
+public_users.get('/books/async', async (req, res) => {
   try {
     const response = await axios.get('http://localhost:5000/');
-    return response.data;
+    return res.status(200).json(response.data);
   } catch (error) {
-    throw error;
+    return res.status(500).json({ message: error.message });
   }
-};
+});
 
-// Get book by ISBN using async/await
-const getBookByISBNAsync = async (isbn) => {
+// Route: Get book by ISBN using async/await
+public_users.get('/books/isbn/async/:isbn', async (req, res) => {
   try {
-    const response = await axios.get(`http://localhost:5000/isbn/${isbn}`);
-    return response.data;
+    const response = await axios.get(`http://localhost:5000/isbn/${req.params.isbn}`);
+    return res.status(200).json(response.data);
   } catch (error) {
-    throw error;
+    return res.status(500).json({ message: error.message });
   }
-};
+});
 
-// Get books by author using async/await
-const getBooksByAuthorAsync = async (author) => {
+// Route: Get books by author using async/await
+public_users.get('/books/author/async/:author', async (req, res) => {
   try {
-    const response = await axios.get(`http://localhost:5000/author/${author}`);
-    return response.data;
+    const response = await axios.get(`http://localhost:5000/author/${req.params.author}`);
+    return res.status(200).json(response.data);
   } catch (error) {
-    throw error;
+    return res.status(500).json({ message: error.message });
   }
-};
+});
 
-// Get books by title using async/await
-const getBooksByTitleAsync = async (title) => {
+// Route: Get books by title using async/await
+public_users.get('/books/title/async/:title', async (req, res) => {
   try {
-    const response = await axios.get(`http://localhost:5000/title/${title}`);
-    return response.data;
+    const response = await axios.get(`http://localhost:5000/title/${req.params.title}`);
+    return res.status(200).json(response.data);
   } catch (error) {
-    throw error;
+    return res.status(500).json({ message: error.message });
   }
-};
+});
 
 module.exports.general = public_users;
